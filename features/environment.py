@@ -1,12 +1,10 @@
 from playwright.sync_api import sync_playwright
 
-from pages.inventory_page import InventoryPage
-from pages.login_page import LoginPage
+from pages.page_manager import PageManager
 from utils.config_loader import ConfigLoader
 
 
 def before_all(context):
-
     context.config_data = ConfigLoader.get_config()
     context.playwright = sync_playwright().start()
 
@@ -25,9 +23,8 @@ def before_scenario(context, scenario):
     """Se ejecuta antes de cada Scenario. Crea una página nueva."""
     context.page = context.browser.new_page()
 
-    # Inicializamos los Page Objects y los guardamos en el contexto
-    context.login_page = LoginPage(context.page)
-    context.inventory_page = InventoryPage(context.page)
+    # Page Manager initialization
+    context.pages = PageManager(context.page)
 
 
 def after_scenario(context, scenario):
