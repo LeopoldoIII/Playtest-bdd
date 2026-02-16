@@ -7,3 +7,8 @@ Feature: Inventory Functionality
     Then the user should be redirected to the inventory page
     When the user adds "Sauce Labs Backpack" to the cart
     Then the "Sauce Labs Backpack" button changes to "Remove"
+    Then the shop icon changes to "1"
+    When the user adds "Sauce Labs Onesie" to the cart
+    Then the "Sauce Labs Onesie" button changes to "Remove"
+    Then the shop icon changes to "2"
+
