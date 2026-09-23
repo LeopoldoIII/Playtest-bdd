@@ -1,4 +1,4 @@
 playwright
-pytest
-pytest-playwright
 behave
+allure-behave
+python-dotenv
