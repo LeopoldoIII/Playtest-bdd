@@ -96,3 +96,12 @@ venv.bak/
 .vscode/
 *.swp
 *.swo
+
+# Test Execution Artifacts & Reports
+reports/
+test-results/
+traces/
+.behavex/
+output/
+*.zip
+
