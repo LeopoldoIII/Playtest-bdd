@@ -23,7 +23,7 @@
   - For applications with test IDs (like SauceDemo), `page.locator("[data-test='...']")` is standard.
 - Page methods must represent user interactions or state queries (e.g., `login(username, password)`, `get_error_message()`).
 - **Never place assertions inside Page Object classes**: Page Objects describe UI actions and retrieve state; assertions belong strictly in step definitions.
-- Register new Page Objects in `pages/page_manager.py` for unified access via `context.pages.<page_name>`.
+- For every new Page Object, register it in `pages/page_manager.py` with a typed cache and a property returning its concrete class. Type its constructor (`page: Page`) and public methods so Pylance can navigate from step calls to method definitions.
 
 ### 2. Assertions & Resilience
 - **Use Web-First Assertions**: Prefer Playwright's `expect` (`from playwright.sync_api import expect`) in step definitions over Python's built-in `assert`.
@@ -46,3 +46,15 @@
 - Use declarative Gherkin: describe **what** business behavior is tested, not low-level click-by-click mechanics.
 - Group related scenarios with descriptive tags (e.g., `@smoke`, `@regression`, `@login`).
 - Keep step definitions reusable and organized under `features/steps/`.
+
+### 5. IDE Navigation
+- Apply these rules whenever creating or moving a feature, step-definition module, or Page Object; navigation support is part of completing the change, not a one-time setup task.
+- Configure `.vscode/settings.json` for Cucumber step discovery:
+  - `cucumberautocomplete.steps`: `features/steps/**/*.py`
+  - `cucumberautocomplete.syncfeatures`: `features/**/*.feature`
+  - `cucumberautocomplete.gherkinDefinitionPart`: `@(given|when|then)\(`
+- Keep these globs and the decorator pattern aligned with the actual locations and syntax of all feature and step files.
+- Recommend `alexkrechik.cucumberautocomplete` in `.vscode/extensions.json`. This enables navigation from feature steps to their Python step definitions.
+- If `.vscode/` is ignored, add narrow `.gitignore` exceptions for the shared `settings.json` and `extensions.json` files.
+- Define and reuse a shared `StepContext` protocol in every step-definition module. Annotate the `context` parameter of every step function, and keep the protocol synchronized with all Behave context attributes those functions use. In this project they are `page: Page`, `pages: PageManager`, `config_data: dict[str, Any]`, and `logger: logging.Logger`.
+- Whenever adding a step or Page Object, maintain the full chain: feature step → matching decorated step function → typed `PageManager` property → typed Page Object method. Update the shared editor globs if files are placed outside the configured locations.

@@ -347,6 +347,57 @@ cp .env.example .env
 ```
 This file stores your base URL and test credentials securely without hardcoding them in `.feature` files.
 
+### 5. Recommended VS Code Extensions for BDD Development
+
+To get the full developer experience with syntax highlighting, instant step definition navigation (`F12`), autocomplete, and scenario snippets, install the recommended VS Code extensions configured in `.vscode/extensions.json`:
+
+| Extension | Marketplace ID | Author | Purpose |
+|---|---|---|---|
+| **Cucumber (Gherkin) Full Support** | `alexkrechik.cucumberautocomplete` | Alexander Krechik | **Code Navigation & Autocomplete**: Jump from `.feature` steps directly to Python implementations (`F12`), autocompletes steps, formats Gherkin. |
+| **Cucumber for Visual Studio Code** | `cucumberopen.cucumber-official` | Cucumber | **Official Language Server**: Real-time syntax validation, scenario gutter execution, parameter token highlighting. |
+| **Snippets and Syntax Highlight for Gherkin** | `stevejpurves.cucumber` | Euclidity | **Productivity Snippets**: Rich color theme highlights and instant scenario scaffolding keywords (`feat`, `scen`, `sceno`). |
+
+#### ⚙️ Workspace Configuration (`.vscode/settings.json`)
+The repository is pre-configured with the discovery paths required by these extensions:
+
+```json
+{
+  "cucumberautocomplete.steps": [
+    "features/steps/**/*.py"
+  ],
+  "cucumberautocomplete.syncfeatures": "features/**/*.feature",
+  "cucumberautocomplete.gherkinDefinitionPart": "@(given|when|then)\\(",
+  "cucumber.features": [
+    "features/**/*.feature"
+  ],
+  "cucumber.glue": [
+    "features/steps/**/*.py"
+  ]
+}
+```
+
+#### 💡 How to Use These Extensions Effectively
+
+1. **Jump to Step Definition (Navigation)**:
+   - Hold `Cmd` (macOS) or `Ctrl` (Windows/Linux) and click on any step in a `.feature` file, or place the cursor on the step and press `F12`.
+   - VS Code will immediately open the Python step definition in `features/steps/`.
+
+2. **Gherkin Step Autocomplete**:
+   - Start typing `Given `, `When `, `Then `, or `And ` inside any scenario.
+   - A dropdown list of existing step definitions across your project will appear. Press `Tab` or `Enter` to auto-fill.
+
+3. **Gherkin Code Snippets (Euclidity)**:
+   - `feat` + `Tab` → Scaffolds a complete `Feature:` header with description.
+   - `scen` + `Tab` → Inserts a boilerplate `Scenario:` with Given / When / Then steps.
+   - `sceno` + `Tab` → Inserts a `Scenario Outline:` including the `Examples:` data table.
+   - `bg` + `Tab` → Inserts a `Background:` block.
+
+4. **Document Formatting & Table Alignment**:
+   - Press `Shift + Option + F` (macOS) or `Shift + Alt + F` (Windows/Linux) to automatically align Gherkin pipes (`|`) in data tables and standardize indentation.
+
+> [!TIP]
+> If step auto-completion or `F12` navigation doesn't activate immediately after pulling new steps, press `Cmd + Shift + P` (or `Ctrl + Shift + P`), type **Developer: Reload Window**, and press `Enter`.
+
 ---
 
 ## 🏃‍♂️ Running the Tests
