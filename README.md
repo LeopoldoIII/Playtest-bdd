@@ -1,8 +1,8 @@
-# Playwright BDD Framework (Python) 🚀
+# Playwright BehaveX Template (Python BDD) 🚀
 
-Welcome to the Playwright BDD automation framework! This project is designed specifically to help users transition from **Selenium** to **Playwright** using **Behave** (Python's native BDD framework).
+Welcome to the **Playwright BehaveX Template** automation framework! This project demonstrates enterprise-level BDD automation using **Playwright** with **Behave** and **BehaveX** (parallel test execution and advanced reporting).
 
-It incorporates enterprise-level best practices like the Page Object Model (POM), Custom Logging, Environment Variables management, and Allure Reporting.
+It incorporates enterprise-level best practices like the Page Object Model (POM), Custom Logging, Environment Variables management, Parallel Execution, and Allure Reporting.
 
 ---
 

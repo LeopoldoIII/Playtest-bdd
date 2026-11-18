@@ -8,7 +8,7 @@ description: >-
 
 # Behave Test Runner Skill
 
-This skill guides test execution and debugging for the Playtest-bdd suite using `behave` and `behavex`.
+This skill guides test execution and debugging for the playwright-behavex-template suite using `behave` and `behavex`.
 
 ## Prerequisites
 Always ensure you use the virtual environment binaries (`./.venv/bin/behave` or `./.venv/bin/behavex`).
